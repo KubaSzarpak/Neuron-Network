@@ -4,6 +4,7 @@ import customtkinter
 from Code.Network import Prepare_data
 from Code.Network import Network
 from Code.Network import My_Vector
+from PIL import Image
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "green", "dark-blue"
@@ -77,23 +78,6 @@ class App(customtkinter.CTk):
         # create tabview
         self.tabview = customtkinter.CTkTabview(self, width=250)
         self.tabview.grid(row=0, column=2, rowspan=2, padx=20, pady=(20, 0), sticky="nsew")
-        # self.tabview.add("CTkTabview")
-        # self.tabview.add("Tab 2")
-        # self.tabview.add("Tab 3")
-        # self.tabview.tab("CTkTabview").grid_columnconfigure(0, weight=1)  # configure grid of individual tabs
-        # self.tabview.tab("Tab 2").grid_columnconfigure(0, weight=1)
-
-        # self.optionmenu_1 = customtkinter.CTkOptionMenu(self.tabview.tab("CTkTabview"), dynamic_resizing=False,
-        #                                                 values=["Value 1", "Value 2", "Value Long Long Long"])
-        # self.optionmenu_1.grid(row=0, column=0, padx=20, pady=(20, 10))
-        # self.combobox_1 = customtkinter.CTkComboBox(self.tabview.tab("CTkTabview"),
-        #                                             values=["Value 1", "Value 2", "Value Long....."])
-        # self.combobox_1.grid(row=1, column=0, padx=20, pady=(10, 10))
-        # self.string_input_button = customtkinter.CTkButton(self.tabview.tab("CTkTabview"), text="Open CTkInputDialog",
-        #                                                    command=self.open_input_dialog_event)
-        # self.string_input_button.grid(row=2, column=0, padx=20, pady=(10, 10))
-        # self.label_tab_2 = customtkinter.CTkLabel(self.tabview.tab("Tab 2"), text="CTkLabel on Tab 2")
-        # self.label_tab_2.grid(row=0, column=0, padx=20, pady=20)
 
         # create data frame
         self.data_frame = customtkinter.CTkFrame(self)
@@ -101,7 +85,7 @@ class App(customtkinter.CTk):
         self.data_frame.grid_columnconfigure(1, weight=1)
         self.data_frame.grid_rowconfigure(4, weight=1)
 
-        file_image = tkinter.PhotoImage(file="../Images/img.png")
+        file_image = customtkinter.CTkImage(Image.open("../Images/img.png"))
 
         training_label = customtkinter.CTkLabel(master=self.data_frame, text="Training data path:", width=0)
         training_label.grid(row=0, column=0, columnspan=1, padx=(20, 0), pady=10, sticky="sne")
