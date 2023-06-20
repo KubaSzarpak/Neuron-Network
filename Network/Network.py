@@ -28,6 +28,22 @@ def generate_perceptions_list(training_data, alpha=0.01):
 
 
 def do(perceptron_list, test_data):
+    """Gives each data from test_data to each perceptron and increments correct_answers
+    if some perceptron classifies correctly.
+
+    Parameters
+    ----------
+    perceptron_list : list
+        a list of perceptrons.
+
+    test_data : list
+        a list of My_Vector that you want to test the network on.
+
+    Returns
+    -------
+    correct_answers : int
+        count how much data was classified correctly.
+     """
     correct_answers = 0
     for vec in test_data:
         for perceptron in perceptron_list:
@@ -39,6 +55,21 @@ def do(perceptron_list, test_data):
 
 
 def execute(perceptron_list, vec):
+    """Gives each perceptron the vector vec. If some perceptron activates then it returns this value. If not, then it returns "Not found"
+
+    Parameters
+    ----------
+    perceptron_list : list
+        a list of perceptrons.
+    vec
+        a vector with data that you want to classify.
+
+    Returns
+    -------
+    result : str
+        The result of classification or "Not found" if network could not classify this data.
+
+    """
     for perceptron in perceptron_list:
         result = perceptron.__func__(vec)
         if result != "Null":

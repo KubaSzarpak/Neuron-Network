@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Welcome to Neuron network’s documentation! &#8212; Neuron network 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-neuron-network-s-documentation">
+<h1>Welcome to Neuron network’s documentation!<a class="headerlink" href="#welcome-to-neuron-network-s-documentation" title="Permalink to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="module-Main">
+<span id="gui"></span><h1>Gui<a class="headerlink" href="#module-Main" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Main.App">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Main.</span></span><span class="sig-name descname"><span class="pre">App</span></span><a class="headerlink" href="#Main.App" title="Permalink to this definition">¶</a></dt>
+<dd><p>generates GUI for neuron network</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.add_alpha_event">
+<span class="sig-name descname"><span class="pre">add_alpha_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.add_alpha_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switches on and off the field to manually pass alpha parameter</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.add_test_data_event">
+<span class="sig-name descname"><span class="pre">add_test_data_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.add_test_data_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Switches on and off the field to manually pass test data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.change_appearance_mode_event">
+<span class="sig-name descname"><span class="pre">change_appearance_mode_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_appearance_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.change_appearance_mode_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets appearance mode of GUI to “System” (standard), “Dark”, “Light”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_appearance_mode</strong> (<em>str</em>) – string value of chosen appearance mode</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.clear_data_button_event">
+<span class="sig-name descname"><span class="pre">clear_data_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.clear_data_button_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clears training_data_entry, test_date_entry and alpha_entry</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.execute_button_event">
+<span class="sig-name descname"><span class="pre">execute_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.execute_button_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepares date from manual entry, executes network with that data and
+inserts textbox with result of network execute method</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.learn_button_event">
+<span class="sig-name descname"><span class="pre">learn_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.learn_button_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if training data is prepared. If not then textbox is inserted with “Podaj właściwe dane”.</p>
+<p>Then it clears tabview if it was filled with data and generates perceptrons list with perceptron to each class from training data.
+Then each perceptron from perceptron list is learned from training data.
+Next, each perceptron is added to tabview with specific information about it
+Finally, textbox is inserted with “Learned” and is_learned field is set to true</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.open_test_file_event">
+<span class="sig-name descname"><span class="pre">open_test_file_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.open_test_file_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens file dialog to choose test data and writes path to that data to test_data_entry field</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.open_training_file_event">
+<span class="sig-name descname"><span class="pre">open_training_file_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.open_training_file_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens file dialog to choose training data and writes path to that data to training_data_entry field</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.save_data_button_event">
+<span class="sig-name descname"><span class="pre">save_data_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.save_data_button_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves training data, test data and alpha parameter if are set.
+Also does read_file() method from Prepare_data module. If file does not exist the textbox field is inserted with “No such {training}/{test} file”</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.show_button_event">
+<span class="sig-name descname"><span class="pre">show_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.show_button_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens new window with graphic visualization of the neuron network</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Main.App.try_button_event">
+<span class="sig-name descname"><span class="pre">try_button_event</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Main.App.try_button_event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Firstly, it cheacks if neuron network is learned.
+Then if checks if test data is set.
+Next, it counts how much data from test data is classified correctly and textbox is inserted with this information</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-My_Vector">
+<span id="my-vector"></span><h1>My vector<a class="headerlink" href="#module-My_Vector" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="My_Vector.My_Vector">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">My_Vector.</span></span><span class="sig-name descname"><span class="pre">My_Vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#My_Vector.My_Vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simple class that stores data list and name. Is used with neuron network and works as a vector</p>
+</dd></dl>
+
+</section>
+<section id="module-Network">
+<span id="network"></span><h1>Network<a class="headerlink" href="#module-Network" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="Network.do">
+<span class="sig-prename descclassname"><span class="pre">Network.</span></span><span class="sig-name descname"><span class="pre">do</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perceptron_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Network.do" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives each data from test_data to each perceptron and increments correct_answers
+if some perceptron classifies correctly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>perceptron_list</strong> (<em>list</em>) – a list of perceptrons.</p></li>
+<li><p><strong>test_data</strong> (<em>list</em>) – a list of My_Vector that you want to test the network on.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>correct_answers</strong> – count how much data was classified correctly.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Network.execute">
+<span class="sig-prename descclassname"><span class="pre">Network.</span></span><span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perceptron_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vec</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Network.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gives each perceptron the vector vec. If some perceptron activates then it returns this value. If not, then it returns “Not found”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>perceptron_list</strong> (<em>list</em>) – a list of perceptrons.</p></li>
+<li><p><strong>vec</strong> – a vector with data that you want to classify.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>result</strong> – The result of classification or “Not found” if network could not classify this data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Network.generate_perceptions_list">
+<span class="sig-prename descclassname"><span class="pre">Network.</span></span><span class="sig-name descname"><span class="pre">generate_perceptions_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">training_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Network.generate_perceptions_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a list of perceptrons, every of a uniq class from given training data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>training_data</strong> (<em>list</em>) – The list of data, that network could learn from</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>perceptron_list</strong> – The list of perceptrons of uniq types</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-Perceptron">
+<span id="perceptron"></span><h1>Perceptron<a class="headerlink" href="#module-Perceptron" title="Permalink to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Perceptron.Perceptron">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">Perceptron.</span></span><span class="sig-name descname"><span class="pre">Perceptron</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alfa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that represents perceptron.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.activation_func">
+<span class="sig-name descname"><span class="pre">activation_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.activation_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Threshold activation function returns 1 if net is greater or equals 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector</strong> (<em>MyVector</em>) – input vector that will be classified by this perceptron.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>1</strong> (<em>int</em>) – if is activated.</p></li>
+<li><p><strong>0</strong> (<em>int</em>) – if is not activated.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.func">
+<span class="sig-name descname"><span class="pre">func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function. It activates all methods of this perceptron to classify given vector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector</strong> (<em>MyVector</em>) – input vector that will be classified by this perceptron</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>self.name</strong> (<em>string</em>) – if perceptron activates</p></li>
+<li><p><em>”Null”</em> – if perceptron is not activated</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.learn">
+<span class="sig-name descname"><span class="pre">learn</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.learn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn function which completes task of learning process. It counts y, which is result of
+activate function and calculates new weights vector and new teta. Then it calculates teaching
+error based on formula “(1/vector.size)*sum.of((d-y)^2)”</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.net">
+<span class="sig-name descname"><span class="pre">net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.net" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dot product minus teta</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vector</strong> (<em>MyVector</em>) – input vector that will be classified by this perceptron.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>net</strong> – Dot product minus teta.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.new_teta">
+<span class="sig-name descname"><span class="pre">new_teta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.new_teta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a new teta based on the formula “alfa * (d - y)”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – expected result</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – actual result</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.new_weight">
+<span class="sig-name descname"><span class="pre">new_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.new_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates a new vector of weights based on the formula “weight + alfa * (d - y) * vector”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d</strong> (<em>int</em>) – expected result</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – actual result</p></li>
+<li><p><strong>vector</strong> (<em>MyVector</em>) – input vector that will be classified by this perceptron</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Perceptron.Perceptron.weight_draw">
+<span class="sig-name descname"><span class="pre">weight_draw</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Perceptron.Perceptron.weight_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draws starting weights for perceptron.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>length</strong> (<em>int</em>) – the length of weight vector.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-Prepare_data">
+<span id="prepare-data"></span><h1>Prepare data<a class="headerlink" href="#module-Prepare_data" title="Permalink to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="Prepare_data.count_letters">
+<span class="sig-prename descclassname"><span class="pre">Prepare_data.</span></span><span class="sig-name descname"><span class="pre">count_letters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Prepare_data.count_letters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts occurrences of each letter of the Latin alphabet in data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – a text</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>character_occurrence</strong> – a list of how much each 26 letters occurrences in data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Prepare_data.read_file">
+<span class="sig-prename descclassname"><span class="pre">Prepare_data.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Prepare_data.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads file and generates a list of My_Vector based on the number of occurrences
+of each letter of the Latin alphabet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em>) – path to a file which stores data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a list of My_Vector that can be used with neuron network.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>vector_list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Neuron network</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Jakub Szarpak.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

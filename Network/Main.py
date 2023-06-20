@@ -1,5 +1,3 @@
-import tkinter
-import tkinter.messagebox
 import customtkinter
 from Code.Network import Prepare_data
 from Code.Network import Network
@@ -11,10 +9,15 @@ customtkinter.set_default_color_theme("green")  # Themes: "blue" (standard), "gr
 
 
 class App(customtkinter.CTk):
+    """generates GUI for neuron network"""
+
     def __init__(self):
+        """Initialize all GUI frames, button, labels"""
+
         super().__init__()
 
         # configure window
+        self.is_learned = False
         self.alpha = 0.0
         self.training_data = []
         self.test_data = []
@@ -128,17 +131,21 @@ class App(customtkinter.CTk):
         self.scrollable_frame_switches[0].select()
         self.scrollable_frame_switches[1].select()
         self.appearance_mode_optionemenu.set("System")
-        self.textbox.insert("0.0",
+        self.textbox.insert(customtkinter.END,
                             "Neuron network\n\n" + "Start\n\n")
 
-    def open_input_dialog_event(self):
-        dialog = customtkinter.CTkInputDialog(text="Type in a number:", title="CTkInputDialog")
-        print("CTkInputDialog:", dialog.get_input())
-
     def change_appearance_mode_event(self, new_appearance_mode: str):
+        """Sets appearance mode of GUI to "System" (standard), "Dark", "Light"
+
+        Parameters
+        ----------
+        new_appearance_mode : str
+            string value of chosen appearance mode
+        """
         customtkinter.set_appearance_mode(new_appearance_mode)
 
     def add_test_data_event(self):
+        """Switches on and off the field to manually pass test data"""
         if self.entry._state == "normal":
             self.entry.configure(state="disabled")
             self.execute_button.configure(state="disabled")
@@ -147,68 +154,86 @@ class App(customtkinter.CTk):
             self.execute_button.configure(state="normal")
 
     def add_alpha_event(self):
+        """Switches on and off the field to manually pass alpha parameter"""
         if self.alpha_entry._state == "normal":
             self.alpha_entry.configure(state="disabled")
         else:
             self.alpha_entry.configure(state="normal")
 
     def open_training_file_event(self):
+        """Opens file dialog to choose training data and writes path to that data to training_data_entry field"""
         path = customtkinter.filedialog.askopenfile()
         if path != None:
             self.training_data_entry.delete(0, customtkinter.END)
             self.training_data_entry.insert(0, path.name)
 
     def open_test_file_event(self):
+        """Opens file dialog to choose test data and writes path to that data to test_data_entry field"""
         path = customtkinter.filedialog.askopenfile()
         if path != None:
             self.test_data_entry.delete(0, customtkinter.END)
             self.test_data_entry.insert(0, path.name)
 
     def save_data_button_event(self):
-        self.textbox.insert("0.0", "\n")
+        """Saves training data, test data and alpha parameter if are set.
+         Also does read_file() method from Prepare_data module. If file does not exist the textbox field is inserted with "No such {training}/{test} file"
+         """
 
         if self.training_data_entry.get() != "":
             training_response = Prepare_data.read_file(self.training_data_entry.get())
             if training_response == -1:
                 error_message = "No such training file"
-                self.textbox.insert("0.0", error_message + "\n\n")
-                self.textbox.tag_add("err", "1.0", "1." + str(len(error_message)))
-                self.textbox.tag_config("err", foreground="#FF6B68")
+                self.textbox.insert(customtkinter.END, error_message + "\n\n")
             else:
                 self.training_data = training_response
-                self.textbox.insert("0.0",
-                                    "Training data is from " + self.training_data_entry.get().split("/")[-1] + "\n")
+                self.textbox.insert(customtkinter.END,
+                                    "Training data is from " + self.training_data_entry.get().split("/")[-1] + "\n\n")
+            self.textbox.see(customtkinter.END)
 
         if self.test_data_entry.get() != "":
             test_response = Prepare_data.read_file(self.test_data_entry.get())
             if test_response == -1:
-                error_message = "No such training file"
-                self.textbox.insert("0.0", error_message + "\n\n")
-                self.textbox.tag_add("err", "1.0", "1." + str(len(error_message)))
-                self.textbox.tag_config("err", foreground="#FF6B68")
+                error_message = "No such test file"
+                self.textbox.insert(customtkinter.END, error_message + "\n\n")
             else:
                 self.test_data = test_response
-                self.textbox.insert("0.0", "Test data is from " + self.test_data_entry.get().split("/")[-1] + "\n")
+                self.textbox.insert(customtkinter.END,
+                                    "Test data is from " + self.test_data_entry.get().split("/")[-1] + "\n\n")
+            self.textbox.see(customtkinter.END)
 
         alpha = self.alpha_entry.get()
         if self.alpha_entry._state == "disabled":
             self.alpha = 0.01
         elif alpha != "":
             self.alpha = float(alpha)
-
-        self.textbox.insert("0.0", "Alpha = " + str(self.alpha) + "\n\n")
+            self.textbox.insert(customtkinter.END, "Alpha = " + str(self.alpha) + "\n\n")
+            self.textbox.see(customtkinter.END)
 
     def clear_data_button_event(self):
+        """Clears training_data_entry, test_date_entry and alpha_entry"""
         self.training_data_entry.delete(0, customtkinter.END)
         self.test_data_entry.delete(0, customtkinter.END)
         self.alpha_entry.delete(0, customtkinter.END)
 
     def learn_button_event(self):
+        """Checks if training data is prepared. If not then textbox is inserted with "Podaj właściwe dane".
+
+        Then it clears tabview if it was filled with data and generates perceptrons list with perceptron to each class from training data.
+        Then each perceptron from perceptron list is learned from training data.
+        Next, each perceptron is added to tabview with specific information about it
+        Finally, textbox is inserted with "Learned" and is_learned field is set to true"""
+
         if len(self.training_data) == 0 or self.alpha == 0.0:
-            self.textbox.insert("0.0", "Podaj właściwe dane\n\n")
+            self.textbox.insert(customtkinter.END, "Podaj właściwe dane\n\n")
+            self.textbox.see(customtkinter.END)
             return
 
+        tabs = self.tabview._tab_dict.copy()
+        for tab in tabs:
+            self.tabview.delete(tab)
+
         self.perceptron_list = Network.generate_perceptions_list(self.training_data, float(self.alpha))
+
         for p in self.perceptron_list:
             p.__learn__()
             self.tabview.add(p.name)
@@ -231,23 +256,43 @@ class App(customtkinter.CTk):
             label = customtkinter.CTkLabel(self.tabview.tab(p.name), text="alpha = " + str(p.alfa))
             label.grid(row=3, column=0, padx=20, pady=(10, 0), sticky="snw")
 
-        self.textbox.insert("0.0", "Learned\n\n")
+        self.textbox.insert(customtkinter.END, "Learned\n\n")
+        self.textbox.see(customtkinter.END)
+        self.is_learned = True
 
     def try_button_event(self):
+        """Firstly, it cheacks if neuron network is learned.
+        Then if checks if test data is set.
+        Next, it counts how much data from test data is classified correctly and textbox is inserted with this information"""
+
+        if not self.is_learned:
+            self.textbox.insert(customtkinter.END,
+                                "Najpierw naucz sieć z danych treningowych podając parametr alpha \n\n")
+            self.textbox.see(customtkinter.END)
+            return
+
         if len(self.test_data) == 0:
-            self.textbox.insert("0.0", "Enter test data\n\n")
+            self.textbox.insert(customtkinter.END, "Enter test data\n\n")
+            self.textbox.see(customtkinter.END)
             return
 
         correct_answers = Network.do(self.perceptron_list, self.test_data)
-        self.textbox.insert("0.0", "Dane testowe: " + str(len(self.test_data)) + " | Dane sprawdzone: " + str(
-            correct_answers) + "\n\n")
+        self.textbox.insert(customtkinter.END,
+                            "Dane testowe: " + str(len(self.test_data)) + " | Dane sprawdzone: " + str(
+                                correct_answers) + "\n\n")
+        self.textbox.see(customtkinter.END)
 
     def show_button_event(self):
+        """Opens new window with graphic visualization of the neuron network"""
+
         diagram_window = customtkinter.CTk()
         diagram_window.geometry("300x300")
         diagram_window.mainloop()
 
     def execute_button_event(self):
+        """Prepares date from manual entry, executes network with that data and
+        inserts textbox with result of network execute method"""
+
         if self.entry.get() == "":
             return
 
@@ -255,9 +300,12 @@ class App(customtkinter.CTk):
         vector = My_Vector.My_Vector(data)
         result = Network.execute(self.perceptron_list, vector)
         self.entry.delete(0, customtkinter.END)
-        self.textbox.insert("0.0", "Result = " + result + "\n\n")
+        self.textbox.insert(customtkinter.END, "Result = " + result + "\n\n")
+        self.textbox.see(customtkinter.END)
 
 
 if __name__ == "__main__":
+    """Checks this is the file that is running. If not, then application will not start"""
+
     app = App()
     app.mainloop()

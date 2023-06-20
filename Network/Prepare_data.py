@@ -1,7 +1,20 @@
 from Code.Network.My_Vector import My_Vector
 
 
-def read_file(path):
+def read_file(path: str):
+    """Reads file and generates a list of My_Vector based on the number of occurrences
+    of each letter of the Latin alphabet.
+
+    Parameters
+    ----------
+    path : str
+        path to a file which stores data.
+
+    Returns
+    -------
+    vector_list
+        a list of My_Vector that can be used with neuron network.
+    """
     try:
         with open(path) as file:
             vector_list = []
@@ -19,9 +32,22 @@ def read_file(path):
         return -1
 
 
-def count_letters(data):
+def count_letters(data: str):
+    """Counts occurrences of each letter of the Latin alphabet in data.
+
+    Parameters
+    ----------
+    data : str
+        a text
+
+    Returns
+    -------
+    character_occurrence : list
+        a list of how much each 26 letters occurrences in data.
+
+    """
     a_ascii = ord("a")
-    character_occurrence = list()
+    character_occurrence = []
     for i in range(26):
         character_occurrence.append(0)
 
