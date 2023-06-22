@@ -1,4 +1,4 @@
-from Code.Network.My_Vector import My_Vector
+from My_Vector import My_Vector
 
 
 def read_file(path: str):

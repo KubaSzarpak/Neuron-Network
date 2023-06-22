@@ -1,7 +1,7 @@
 import customtkinter
-from Code.Network import Prepare_data
-from Code.Network import Network
-from Code.Network import My_Vector
+import Prepare_data
+import Network
+import My_Vector
 from PIL import Image
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -51,8 +51,9 @@ class App(customtkinter.CTk):
         self.try_button = customtkinter.CTkButton(self.sidebar_frame, text="Try", command=self.try_button_event)
         self.try_button.grid(row=4, column=0, padx=10, pady=(20, 0), sticky="ew")
 
-        self.show_button = customtkinter.CTkButton(self.sidebar_frame, text="Show", command=self.show_button_event)
-        self.show_button.grid(row=5, column=0, padx=10, pady=20, sticky="ew")
+        # button to show the network
+        # self.show_button = customtkinter.CTkButton(self.sidebar_frame, text="Show", command=self.show_button_event)
+        # self.show_button.grid(row=5, column=0, padx=10, pady=20, sticky="ew")
 
         # create sidebar settings scroll frame
         self.scrollable_frame = customtkinter.CTkScrollableFrame(self.sidebar_frame, label_text="Settings")
@@ -69,10 +70,6 @@ class App(customtkinter.CTk):
                                          command=self.add_alpha_event)
         switch.grid(row=1, column=0, padx=10, pady=(0, 20), sticky="ew")
         self.scrollable_frame_switches.append(switch)
-        for i in range(2, 5):
-            switch = customtkinter.CTkSwitch(master=self.scrollable_frame, text=f"CTkSwitch {i}")
-            switch.grid(row=i, column=0, padx=10, pady=(0, 20))
-            self.scrollable_frame_switches.append(switch)
 
         # create textbox
         self.textbox = customtkinter.CTkTextbox(self, width=250)
@@ -90,6 +87,7 @@ class App(customtkinter.CTk):
 
         file_image = customtkinter.CTkImage(Image.open("../Images/img.png"))
 
+        # data frame training
         training_label = customtkinter.CTkLabel(master=self.data_frame, text="Training data path:", width=0)
         training_label.grid(row=0, column=0, columnspan=1, padx=(20, 0), pady=10, sticky="sne")
         self.training_data_entry = customtkinter.CTkEntry(self.data_frame,
@@ -99,6 +97,8 @@ class App(customtkinter.CTk):
                                                             command=self.open_training_file_event, width=0,
                                                             image=file_image)
         self.training_data_button.grid(row=0, column=3, columnspan=1, padx=10, pady=10, sticky="ew")
+
+        # data frame test
         test_label = customtkinter.CTkLabel(master=self.data_frame, text="Test data path:",
                                             width=0)
         test_label.grid(row=1, column=0, columnspan=1, padx=(20, 0), pady=10, sticky="sne")
@@ -108,19 +108,24 @@ class App(customtkinter.CTk):
                                                         command=self.open_test_file_event, width=0, image=file_image)
         self.test_data_button.grid(row=1, column=3, columnspan=1, padx=10, pady=10, sticky="ew")
 
+        # data frame alpha parameter
         aplha_label = customtkinter.CTkLabel(master=self.data_frame, text="Alpha:",
                                              width=0)
         aplha_label.grid(row=2, column=0, columnspan=1, padx=(20, 0), pady=10, sticky="sne")
         self.alpha_entry = customtkinter.CTkEntry(self.data_frame, placeholder_text="Alpha")
         self.alpha_entry.grid(row=2, column=1, columnspan=2, padx=(20, 10), pady=10, sticky="snew")
 
+        # data frame save button
         self.save_data_button = customtkinter.CTkButton(self.data_frame, text="Save data",
                                                         command=self.save_data_button_event, width=0)
         self.save_data_button.grid(row=3, column=0, columnspan=1, padx=20, pady=10, sticky="sne")
+
+        # data frame clear button
         self.clear_data_button = customtkinter.CTkButton(self.data_frame, text="Clear data",
                                                          command=self.clear_data_button_event, width=0)
         self.clear_data_button.grid(row=3, column=1, columnspan=1, padx=20, pady=10, sticky="snw")
 
+        # manual test area
         self.entry = customtkinter.CTkEntry(self, placeholder_text="Write ...")
         self.entry.grid(row=3, column=1, columnspan=1, padx=(20, 0), pady=20, sticky="snew")
 
@@ -235,7 +240,7 @@ class App(customtkinter.CTk):
         self.perceptron_list = Network.generate_perceptions_list(self.training_data, float(self.alpha))
 
         for p in self.perceptron_list:
-            p.__learn__()
+            p.learn()
             self.tabview.add(p.name)
             # print(p.name)
             self.tabview.tab(p.name).grid_columnconfigure(0, weight=1)

@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/Data/lang.test.csv" charset="windows-1250" />
     <file url="file://$PROJECT_DIR$/Data/lang.train.csv" charset="windows-1250" />
+    <file url="file://$PROJECT_DIR$/Data/lang.train_extended.csv" charset="windows-1250" />
   </component>
 </project>

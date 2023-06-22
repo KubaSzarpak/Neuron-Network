@@ -1,4 +1,4 @@
-from Code.Network.Perceptron import Perceptron
+from Perceptron import Perceptron
 
 
 def generate_perceptions_list(training_data, alpha=0.01):
@@ -47,7 +47,7 @@ def do(perceptron_list, test_data):
     correct_answers = 0
     for vec in test_data:
         for perceptron in perceptron_list:
-            if vec.name == perceptron.__func__(vec):
+            if vec.name == perceptron.func(vec):
                 correct_answers += 1
                 break
 
@@ -71,7 +71,7 @@ def execute(perceptron_list, vec):
 
     """
     for perceptron in perceptron_list:
-        result = perceptron.__func__(vec)
+        result = perceptron.func(vec)
         if result != "Null":
             return result
     return "Not found"
